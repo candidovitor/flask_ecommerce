@@ -1,6 +1,11 @@
-from flask import redirect, render_template, url_for, url_for, flash, request
+from flask import redirect, render_template, url_for, flash, request, session
 from shop import db, app
-from .models import Brand, Category
+from .models import Brand, Category, Addproduct
+from .forms import Addproducts
+
+@app.route('/')
+def gome():
+    return''
 
 @app.route('/addbrand', methods=['GET', 'POST'])
 def addbrand():
@@ -26,3 +31,8 @@ def addcat():
         return redirect(url_for('addbrand'))
 
     return render_template('products/addbrand.html')
+
+@app.route('/addproduct', methods=['POST', 'GET'])
+def addproduct():
+    form = Addproducts(request.form)
+    return render_template('products/addproduct.html' , title='Add product page', form=form)    
