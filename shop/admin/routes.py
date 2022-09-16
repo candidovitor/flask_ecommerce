@@ -4,8 +4,8 @@ from shop import app, db, bcrypt
 from .forms import RegistrationForm, LoginForm
 from .models import User
 
-""" from shop.products.models import Category, Brand, Addproduct
-import os """
+from shop.products.models import Category, Brand, Addproduct
+import os
 
 """ @app.route('/')
 def home():
