@@ -48,11 +48,11 @@
     <table class="table table-sm">
         <thead>
             <th>Sr</th>
-            <th>Image</th>
             <th>Name</th>
             <th>Price</th>
             <th>Discount</th>
             <th>Brand</th>
+            <th>Image</th>
             <th>Edit</th>
             <th>Delete</th>
         </thead>
@@ -64,8 +64,8 @@
                 <td>{{product.name}}</td>
                 <td>{{product.price}}</td>
                 <td>{{product.discount}}</td>
-                <td>{{product.brand.name}}%</td>
-                <td><img scr="{{url_for('static', filename='images/' + product)}}"></td>
+                <td>{{product.brand.name}}</td>
+                <td><img scr="{{url_for('static', filename='images/' + product.image_1)}}"></td>
                 <td>Edit</td>
                 <td>Delete</td>
             </tr>
