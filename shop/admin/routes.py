@@ -7,11 +7,7 @@ from .models import User
 from shop.products.models import Category, Brand, Addproduct
 import os
 
-""" @app.route('/')
-def home():
-    return render_template('admin/index.html', title='Admin Page') """
-
-@app.route('/admin')
+@app.route('/')
 def admin():
     if 'email' not in session:
         flash(f'Please login first', 'danger')
