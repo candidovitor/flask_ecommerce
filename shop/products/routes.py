@@ -1,4 +1,6 @@
-from flask import redirect, render_template, url_for, flash, request, session
+from flask import redirect, render_template, url_for, flash, request, session, current_app
+import secrets, os
+
 from shop import db, app
 from .models import Brand, Category, Addproduct
 from .forms import Addproducts

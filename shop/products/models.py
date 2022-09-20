@@ -34,6 +34,4 @@ class Addproduct(db.Model):
         return '<AddProduct %r>' % self.title
 
 
-
-
 db.create_all()

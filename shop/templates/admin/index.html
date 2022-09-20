@@ -64,8 +64,8 @@
                 <td>{{product.name}}</td>
                 <td>{{product.price}}</td>
                 <td>{{product.discount}}</td>
-                <td>{{product.brand.name}}</td>
-                <td><img scr="{{url_for=('static', filename='images/' + produt)}}"></td>
+                <td>{{product.brand.name}}%</td>
+                <td><img scr="{{url_for('static', filename='images/' + product)}}"></td>
                 <td>Edit</td>
                 <td>Delete</td>
             </tr>

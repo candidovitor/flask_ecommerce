@@ -1,5 +1,5 @@
 from flask_wtf.file import FileAllowed, FileField, FileRequired
-from wtforms import Form, IntegerField, StringField, BooleanField, TextAreaField, validators
+from wtforms import Form, IntegerField, StringField, BooleanField, TextAreaField, validators, Form, DecimalField
 
 class Addproducts(Form):
     name = StringField('Name', [validators.DataRequired()])

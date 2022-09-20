@@ -17,7 +17,7 @@ def admin():
         flash(f'Please login first', 'danger')
         return redirect(url_for('login')) 
     products = Addproduct.query.all()
-    return render_template('admin/index.html', title='Admin page',products=products)
+    return render_template('admin/index.html', title='Admin page', products=products)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
