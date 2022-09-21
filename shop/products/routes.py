@@ -70,3 +70,42 @@ def addproduct():
         db.session.commit()
         return redirect(url_for('admin'))
     return render_template('products/addproduct.html' , title='Add product page', form=form, brands=brands, categories= categories)
+
+@app.route('/updatebrand/<int:id>', methods=['GET', 'POST'])
+def updatebrand(id):
+    """ if 'email' not in session:
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))  """
+
+    updatebrand = Brand.query.get_or_404(id)
+    brand = request.form.get('brand')
+    if request.method == 'POST':
+        updatebrand.name = brand
+        db.session.commit()
+        flash(f'The brand {brand} has been updated.', 'success')
+        return redirect(url_for('brands'))
+
+    return render_template('products/updatebrand.html', title='Update brands', updatebrand=updatebrand)
+
+@app.route('/updatecategory/<int:id>', methods=['GET', 'POST'])
+def updatecategory(id):
+    """ if 'email' not in session:
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login'))  """
+
+    updatecategory = Category.query.get_or_404(id)
+    category = request.form.get('category')
+
+    if request.method == 'POST':
+        updatecategory.name = category
+        db.session.commit()
+        flash(f'The category {category} has been updated.', 'success')
+        return redirect(url_for('category'))
+
+    return render_template('products/updatebrand.html', title='Update categories', updatecategory=updatecategory)
+
+@app.route('/updateproduct/<int:id>', methods=['GET', 'POST'])
+def updatecategory(id):
+    form = Addproduct(request.form):
+
+    return render_template('products/updatebrand.html', title='Update categories', form=form)
