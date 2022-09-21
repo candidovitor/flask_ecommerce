@@ -54,7 +54,7 @@ def addproduct():
         discount= form.discount.data
         stock= form.stock.data
         colors= form.colors.data
-        desc= form.discription.data
+        desc= form.description.data
         brand= request.form.get('brand')
         category= request.form.get('category')
 
@@ -104,8 +104,34 @@ def updatecategory(id):
 
     return render_template('products/updatebrand.html', title='Update categories', updatecategory=updatecategory)
 
-@app.route('/updateproduct/<int:id>', methods=['GET', 'POST'])
-def updatecategory(id):
-    form = Addproduct(request.form):
 
-    return render_template('products/updatebrand.html', title='Update categories', form=form)
+@app.route('/updateproduct/<int:id>', methods=['GET', 'POST'])
+def updateproduct(id):
+    brands = Brand.query.all()
+    categories = Category.query.all()
+    product = Addproduct.query.get_or_404(id)
+    brand = request.form.get('brand')
+    category = request.form.get('category')
+    form = AddProducts(request.form)
+
+    if request.method == 'POST':
+        product.name = form.name.data
+        product.price = form.price.data
+        product.discount = form.discount.data
+        product.brand_id = brand
+        product.category_id = category
+        product.colors = form.colors.data
+        product.desc = form.description.data
+
+        db.session.commit()
+        flash(f'You product has been updated.', 'success')
+        return redirect(url_for('admin'))
+
+    form.name.data = product.name
+    form.price.data = product.price
+    form.discount.data = product.discount
+    form.stock.data = product.stock
+    form.colors.data = product.colors 
+    form.description.data = product.desc
+
+    return render_template('products/updateproduct.html', form=form, brands=brands, categories=categories, product=product)
