@@ -87,6 +87,22 @@ def updatebrand(id):
 
     return render_template('products/updatebrand.html', title='Update brands', updatebrand=updatebrand)
 
+@app.route('/deletebrand/<int:id>')
+def deletebrand(id):
+    """ if 'email' not in session:
+        flash(f'Please login first', 'danger')
+        return redirect(url_for('login')) """
+
+    brand = Brand.query.get_or_404(id)
+    if request.method == 'POST': 
+        db.session.delete('brand')
+        db.session.commit()
+        flash(f'The brand {brand.name} was deleted.', 'success')
+        return redirect(url_for('admin'))
+
+    flash(f'An error ocurred','danger')    
+    return redirect(url_for('admin'))
+
 @app.route('/updatecategory/<int:id>', methods=['GET', 'POST'])
 def updatecategory(id):
     """ if 'email' not in session:
@@ -122,6 +138,27 @@ def updateproduct(id):
         product.category_id = category
         product.colors = form.colors.data
         product.desc = form.description.data
+
+        if request.file.get('image_1'):
+            try:
+                os.unlink(os.path.join(current_app.root_path, "'static/images/"+produto.image_1))
+                product.image_1 = photos.save(request.files.get('image_1'), name=secrets.token_hex(10) + '.')
+            except:
+                product.image_1 = photos.save(request.files.get('image_1'), name=secrets.token_hex(10) + '.')
+
+        if request.file.get('image_2'):
+            try:
+                os.unlink(os.path.join(current_app.root_path, "'static/images/"+produto.image_1))
+                product.image_2 = photos.save(request.files.get('image_2'), name=secrets.token_hex(10) + '.')
+            except:
+                product.image_2 = photos.save(request.files.get('image_2'), name=secrets.token_hex(10) + '.')
+
+        if request.file.get('image_3'):
+            try:
+                os.unlink(os.path.join(current_app.root_path, "'static/images/"+produto.image_1))
+                product.image_3 = photos.save(request.files.get('image_3'), name=secrets.token_hex(10) + '.')
+            except:
+                product.image_3 = photos.save(request.files.get('image_3'), name=secrets.token_hex(10) + '.')
 
         db.session.commit()
         flash(f'You product has been updated.', 'success')

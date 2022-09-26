@@ -7,6 +7,10 @@ from .models import User
 from shop.products.models import Category, Brand, Addproduct
 import os
 
+@app.route('/')
+def home():
+    return redirect(url_for('login'))
+
 @app.route('/admin')
 def admin():
     if 'email' not in session:
