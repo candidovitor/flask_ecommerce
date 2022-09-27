@@ -94,14 +94,17 @@ def deletebrand(id):
         return redirect(url_for('login')) """
 
     brand = Brand.query.get_or_404(id)
-    if request.method == 'POST': 
-        db.session.delete('brand')
-        db.session.commit()
+    #if request.method == 'POST': 
+    try:
+        db.session.delete(brand)
+        print(' esta entrando... ')
         flash(f'The brand {brand.name} was deleted.', 'success')
+        db.session.commit()
         return redirect(url_for('admin'))
-
-    flash(f'An error ocurred','danger')    
-    return redirect(url_for('admin'))
+    except:
+        print(' esta aqui tbm... ')
+        flash(f'An error ocurred','danger')    
+        return redirect(url_for('admin'))
 
 @app.route('/updatecategory/<int:id>', methods=['GET', 'POST'])
 def updatecategory(id):
